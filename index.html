@@ -148,6 +148,1095 @@
 
         .nav-controls { display: flex; align-items: center; gap: 0.8rem; }
 
+        .theme-toggle, .cart-btn, .sound-toggle, .layout-toggle {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white; border: none;
+            padding: clamp(0.5rem, 1vw, 0.75rem) clamp(0.8rem, 1.5vw, 1.2rem);
+            border-radius: 50px; cursor: pointer;
+            font-size: clamp(0.9rem, 1.2vw, 1rem); font-weight: 700;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.25);
+            display: flex; align-items: center; gap: 0.4rem;
+            white-space: nowrap;
+        }
+        .theme-toggle:active, .cart-btn:active, .sound-toggle:active, .layout-toggle:active { transform: scale(0.95); }
+
+        .search-container { flex-grow: 1; max-width: 400px; min-width: 200px; position: relative; }
+        .search-input {
+            width: 100%; padding: 0.6rem 1rem 0.6rem 2.4rem;
+            border-radius: 50px; border: 2px solid #cbd5e1;
+            background: var(--card-bg); font-size: 0.9rem; font-weight: 600;
+            color: var(--text-color); outline: none; transition: all 0.2s ease;
+        }
+        .search-input:focus { border-color: var(--primary-color); box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.1); }
+        .search-icon { position: absolute; left: 0.9rem; top: 50%; transform: translateY(-50%); color: #94a3b8; }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.55), rgba(219, 39, 119, 0.45)), url('https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover; background-position: center;
+            text-align: center; padding: clamp(8rem, 15vh, 12rem) 1rem clamp(4rem, 8vh, 6rem); position: relative;
+            margin-top: 65px;
+        }
+        .hero-content-wrapper {
+            position: relative; z-index: 2;
+            background: var(--card-bg); backdrop-filter: blur(10px);
+            padding: clamp(1.8rem, 3.5vw, 2.8rem); border-radius: 24px; display: inline-block;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 1px solid var(--glass-border);
+            max-width: 90%;
+        }
+        .hero h1 { font-size: clamp(2.1rem, 4.5vw, 3.4rem); margin-bottom: 0.5rem; color: var(--secondary-color); font-weight: 900; }
+        .hero p { font-size: clamp(1rem, 1.6vw, 1.15rem); color: var(--text-color); font-weight: 600; opacity: 0.9; }
+
+        .container { max-width: 1400px; margin: clamp(2rem, 4vh, 3rem) auto; padding: 0 clamp(1rem, 3vw, 2.5rem); }
+        .section-title {
+            font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 1.5rem;
+            position: relative; display: inline-block;
+        }
+        .section-title::after {
+            content: ''; display: block; width: 40px; height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            margin-top: 0.4rem; border-radius: 10px;
+        }
+
+        /* Dynamic Products Grid Layouts */
+        .products-grid {
+            display: grid; 
+            gap: clamp(1.2rem, 2.5vw, 2.2rem);
+            transition: grid-template-columns 0.3s ease;
+        }
+
+        /* Layout Modes */
+        .products-grid.layout-auto {
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        }
+        .products-grid.layout-1col {
+            grid-template-columns: 1fr;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .products-grid.layout-2col {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .products-grid.layout-4col {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        @media (max-width: 767px) {
+            .navbar { flex-direction: column; align-items: stretch; gap: 0.8rem; }
+            .nav-controls { justify-content: space-between; flex-wrap: wrap; }
+            .search-container { max-width: 100%; }
+            .hero { margin-top: 130px; }
+        }
+
+        .product-card {
+            background: var(--card-bg); border-radius: 20px; overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03); border: 1px solid var(--glass-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 16px 35px rgba(236, 72, 153, 0.15); }
+        .product-img-container { position: relative; width: 100%; height: 260px; background: #f8fafc; overflow: hidden; }
+        
+        .corner-ribbon {
+            position: absolute; top: 0; right: 0; width: 100px; height: 100px; overflow: hidden; pointer-events: none; z-index: 15;
+        }
+        .corner-ribbon span {
+            position: absolute; display: block; width: 140px; padding: 6px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15); color: #fff; font: 700 9px/1 'Segoe UI', sans-serif;
+            letter-spacing: 0.5px; text-transform: uppercase; text-align: center; left: -14px; top: 24px; transform: rotate(45deg);
+        }
+
+        .product-img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; position: absolute; top:0; left:0; opacity: 0; transition: opacity 0.5s ease; }
+        .product-img.active { opacity: 1; }
+        
+        .product-info { padding: 1.4rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+        .product-title { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.4rem; }
+        .product-desc { font-size: 0.92rem; color: #64748b; margin-bottom: 1rem; line-height: 1.4; }
+        [data-theme="dark"] .product-desc, [data-theme="night"] .product-desc { color: #94a3b8; }
+        [data-theme="evening"] .product-desc { color: #7c2d12; }
+        .product-price { color: var(--primary-color); font-weight: 900; font-size: 1.3rem; margin-bottom: 1rem; }
+
+        .add-to-cart {
+            width: 100%; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white; border: none; padding: 0.85rem; border-radius: 14px;
+            cursor: pointer; font-size: 1rem; font-weight: 800; transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.25); margin-top: 0.5rem;
+        }
+        .add-to-cart:hover { opacity: 0.95; transform: translateY(-2px); }
+
+        .gallery-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.75); backdrop-filter: blur(8px);
+            z-index: 2000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .gallery-modal.active { display: flex; opacity: 1; }
+        .gallery-content {
+            background: var(--card-bg); padding: 1.5rem; border-radius: 24px;
+            width: 90%; max-width: 600px; position: relative; text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3); border: 1px solid var(--glass-border);
+        }
+        .gallery-main-img { width: 100%; height: 320px; object-fit: cover; border-radius: 16px; margin-bottom: 1rem; }
+        .gallery-thumbs { display: flex; gap: 10px; justify-content: center; overflow-x: auto; padding-bottom: 0.5rem; }
+        .gallery-thumb {
+            width: 60px; height: 60px; object-fit: cover; border-radius: 10px; cursor: pointer;
+            border: 2px solid transparent; transition: border-color 0.2s, opacity 0.2s; opacity: 0.7;
+        }
+        .gallery-thumb.active, .gallery-thumb:hover { border-color: var(--primary-color); opacity: 1; }
+        .close-gallery, .close-cart {
+            position: absolute; top: 1rem; right: 1rem;
+            background: #f1f5f9; border: none; width: 36px; height: 36px;
+            border-radius: 50%; font-size: 1.2rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+        }
+        [data-theme="dark"] .close-gallery, [data-theme="dark"] .close-cart,
+        [data-theme="night"] .close-gallery, [data-theme="night"] .close-cart { background: #334155; color: white; }
+        [data-theme="evening"] .close-gallery, [data-theme="evening"] .close-cart { background: #fed7aa; color: #431407; }
+
+        .floating-whatsapp {
+            position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white;
+            width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 99; text-decoration: none;
+            transition: transform 0.2s;
+        }
+        .floating-whatsapp:hover { transform: scale(1.1); }
+
+        .cart-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(15, 23, 42, 0.6); backdrop-filter: blur(5px);
+            z-index: 1000; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.2s ease;
+        }
+        .cart-modal.active { display: flex; opacity: 1; }
+        .cart-content {
+            background: var(--card-bg); padding: clamp(1.2rem, 2.5vw, 2rem); border-radius: 24px;
+            width: 90%; max-width: 500px; max-height: 85vh; overflow-y: auto; position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); border: 1px solid var(--glass-border); text-align: left;
+        }
+
+        .cart-items-list { list-style: none; margin: 1rem 0; }
+        .cart-item { display: flex; align-items: center; padding: 0.9rem 0; border-bottom: 1px dashed rgba(0,0,0,0.1); gap: 0.9rem; }
+        .cart-item img { width: 65px; height: 65px; object-fit: cover; border-radius: 12px; }
+        .cart-total { font-size: 1.25rem; font-weight: 900; margin: 1rem 0; display: flex; justify-content: space-between; border-top: 2px solid rgba(0,0,0,0.05); padding-top: 1rem; }
+
+        .checkout-form { margin-top: 1rem; background: rgba(0,0,0,0.02); padding: 1rem; border-radius: 14px; }
+        [data-theme="dark"] .checkout-form, [data-theme="night"] .checkout-form { background: rgba(255,255,255,0.02); }
+        [data-theme="evening"] .checkout-form { background: rgba(67, 20, 7, 0.02); }
+        .form-group { margin-bottom: 0.8rem; }
+        .form-group label { display: block; margin-bottom: 0.3rem; font-weight: 800; font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 0.75rem; border: 2px solid #cbd5e1; border-radius: 10px;
+            font-size: 0.95rem; outline: none; background: var(--card-bg); color: var(--text-color); font-family: inherit;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary-color); }
+
+        .order-btn {
+            width: 100%; background: linear-gradient(135deg, #10b981, #059669);
+            color: white; border: none; padding: 1rem; border-radius: 12px; margin-top: 0.8rem;
+            cursor: pointer; font-size: 1rem; font-weight: 900; box-shadow: 0 6px 15px rgba(16, 185, 129, 0.25);
+        }
+        .order-btn:hover { opacity: 0.95; transform: translateY(-1px); }
+
+        footer { background-color: #0f172a; color: white; text-align: center; padding: 2.5rem 1.5rem; margin-top: 3rem; position: relative; z-index: 1; }
+        .social-links { display: flex; justify-content: center; gap: 1.2rem; margin: 1rem 0; }
+        .social-links a { color: white; text-decoration: none; font-weight: bold; font-size: 0.95rem; background: rgba(255,255,255,0.1); padding: 0.4rem 1rem; border-radius: 20px; }
+    </style>
+</head>
+<body data-theme="light">
+
+    <div class="bg-decoration"></div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="cinematic-yarn">🧶</div>
+        <div class="preloader-text">Loopia-LB ✨</div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <a href="#" class="logo">🧶 Loopia-LB</a>
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search products..." oninput="filterProducts()">
+            </div>
+            <div class="nav-controls">
+                <button class="layout-toggle" onclick="toggleLayout()" id="layoutBtn" title="Change View Layout">📱 2-Cols</button>
+                <button class="sound-toggle" onclick="toggleSound()" id="soundBtn" title="Toggle Sound FX">🔊</button>
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">☀️</button>
+                <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Gallery Modal -->
+    <div class="gallery-modal" id="galleryModal">
+        <div class="gallery-content">
+            <button class="close-gallery" onclick="closeGallery()">&times;</button>
+            <h3 id="galleryTitle" style="font-size: 1.2rem; font-weight: 900; margin-bottom: 1rem; color: var(--secondary-color);">Product Gallery</h3>
+            <img id="galleryMainImg" src="" alt="Main Gallery View" class="gallery-main-img">
+            <div class="gallery-thumbs" id="galleryThumbs"></div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+            <h2 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.4rem;">Your Cart 🛍️</h2>
+            <ul class="cart-items-list" id="cartItemsList">
+                <p style="color: #64748b; text-align: center; padding: 1.5rem 0; font-size: 1rem;">Your cart is empty.</p>
+            </ul>
+            <div id="cartSummary" style="display: none;">
+                <div class="cart-total"><span>Total:</span> <span id="finalTotalPrice">$0.00</span></div>
+                <div class="checkout-form">
+                    <div class="form-group">
+                        <label for="paymentMethodSelect">Payment Method 💳</label>
+                        <select id="paymentMethodSelect">
+                            <option value="Cash on Delivery">Cash on Delivery</option>
+                            <option value="Whish Money Transfer">Whish Money Transfer</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="customNoteInput">Order notes or custom requests 📝</label>
+                        <textarea id="customNoteInput" rows="2" placeholder="Preferred colors or notes..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneInput">Your WhatsApp Number 📱</label>
+                        <input type="tel" id="phoneInput" placeholder="+961 ">
+                    </div>
+                    <button class="order-btn" onclick="submitOrder()">Complete Order via WhatsApp 💬</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content-wrapper">
+            <h1>Handmade Crochet</h1>
+            <p>Cute, tiny, and hand-stitched 🧶. Find your perfect keychain companion! ✨</p>
+        </div>
+    </section>
+
+    <!-- Main Products Grid -->
+    <main class="container">
+        <h2 class="section-title">Our Collection</h2>
+        
+        <div class="products-grid layout-auto" id="productsGrid">
+            
+            <!-- Sunflower Duck -->
+            <div class="product-card" data-name="sunflower duck flower duckling keychain" data-accent="#eab308">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/nG2vNLT.jpeg" alt="Sunflower Duck 1" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Sunflower Duck 🌻', ['https://i.imgur.com/nG2vNLT.jpeg', 'https://i.imgur.com/SL9dqoN.jpeg'], '#eab308')">
+                    <img src="https://i.imgur.com/SL9dqoN.jpeg" alt="Sunflower Duck 2" class="product-img" loading="lazy" onclick="playPopSound(); openGallery('Sunflower Duck 🌻', ['https://i.imgur.com/nG2vNLT.jpeg', 'https://i.imgur.com/SL9dqoN.jpeg'], '#eab308')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Sunflower Duck 🌻</h3>
+                        <p class="product-desc">An adorable handmade crochet duck wearing a vibrant yellow sunflower hood. 🌻💛✨</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$6</p>
+                        <button class="add-to-cart" onclick="addToCart('Sunflower Duck 🌻', 6.0, 'https://i.imgur.com/nG2vNLT.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hello Kitty Doll -->
+            <div class="product-card" data-name="hello kitty pink dress keychain doll" data-accent="#ec4899">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/NoLJWkQ.jpeg" alt="Hello Kitty Doll" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Hello Kitty Doll', ['https://i.imgur.com/NoLJWkQ.jpeg'], '#ec4899')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Hello Kitty</h3>
+                        <p class="product-desc">Adorable handmade crochet Hello Kitty doll wearing a cute pink dress and ribbon.</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$5</p>
+                        <button class="add-to-cart" onclick="addToCart('Hello Kitty', 5.0, 'https://i.imgur.com/NoLJWkQ.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Snoopy & Friends Bag Charm -->
+            <div class="product-card" data-name="snoopy puppy dog bag charm keychain" data-accent="#3b82f6">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/Q9b7bEp.jpeg" alt="Snoopy Bag Charm 1" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Snoopy Bag Charm', ['https://i.imgur.com/Q9b7bEp.jpeg', 'https://i.imgur.com/r9zpkXK.jpeg'], '#3b82f6')">
+                    <img src="https://i.imgur.com/r9zpkXK.jpeg" alt="Snoopy Bag Charm 2" class="product-img" loading="lazy" onclick="playPopSound(); openGallery('Snoopy Bag Charm', ['https://i.imgur.com/Q9b7bEp.jpeg', 'https://i.imgur.com/r9zpkXK.jpeg'], '#3b82f6')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Snoopy Bag Charm</h3>
+                        <p class="product-desc">Handmade crochet Snoopy plush keychain with a cute skirt and little bows. 🤍🐾</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$5</p>
+                        <button class="add-to-cart" onclick="addToCart('Snoopy Bag Charm', 5.0, 'https://i.imgur.com/Q9b7bEp.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sweet Cow -->
+            <div class="product-card" data-name="sweet cow keychain cow" data-accent="#8b5cf6">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/DHWtiCj.jpeg" alt="Sweet Cow Keychain" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Sweet Cow Keychain', ['https://i.imgur.com/DHWtiCj.jpeg'], '#8b5cf6')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Sweet Cow</h3>
+                        <p class="product-desc">Cute spotted plush cow with tiny horns</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$4.5</p>
+                        <button class="add-to-cart" onclick="addToCart('Sweet Cow', 4.5, 'https://i.imgur.com/DHWtiCj.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wise Owl -->
+            <div class="product-card" data-name="wise owl with glasses owl" data-accent="#d97706">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/huW45GY.jpeg" alt="Wise Owl with Glasses" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Wise Owl with Glasses', ['https://i.imgur.com/huW45GY.jpeg'], '#d97706')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Wise Owl</h3>
+                        <p class="product-desc">Adorable handmade owl wearing cute glasses and pink bow</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$4.5</p>
+                        <button class="add-to-cart" onclick="addToCart('Wise Owl', 4.5, 'https://i.imgur.com/huW45GY.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mochi -->
+            <div class="product-card" data-name="🐾 Mochi 🤍 puppy dog" data-accent="#64748b">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/PzgZ2CZ.jpeg" alt="🐾 Mochi 🤍" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('🐾 Mochi 🤍', ['https://i.imgur.com/PzgZ2CZ.jpeg'], '#64748b')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">🐾 Mochi 🤍</h3>
+                        <p class="product-desc">A lovable handmade crochet puppy with tiny paws and a sweet smile. 🐶🤍</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$4.5</p>
+                        <button class="add-to-cart" onclick="addToCart('🐾 Mochi 🤍', 4.5, 'https://i.imgur.com/PzgZ2CZ.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Winter Belle -->
+            <div class="product-card" data-name="❄️ Winter Belle 💙 princess doll" data-accent="#0284c7">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/YSJcg9e.jpeg" alt="❄️ Winter Belle 💙 1" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('❄️ Winter Belle 💙', ['https://i.imgur.com/YSJcg9e.jpeg', 'https://i.imgur.com/oEx1GJt.jpeg', 'https://i.imgur.com/HtCrMT1.jpeg'], '#0284c7')">
+                    <img src="https://i.imgur.com/oEx1GJt.jpeg" alt="❄️ Winter Belle 💙 2" class="product-img" loading="lazy" onclick="playPopSound(); openGallery('❄️ Winter Belle 💙', ['https://i.imgur.com/YSJcg9e.jpeg', 'https://i.imgur.com/oEx1GJt.jpeg', 'https://i.imgur.com/HtCrMT1.jpeg'], '#0284c7')">
+                    <img src="https://i.imgur.com/HtCrMT1.jpeg" alt="❄️ Winter Belle 💙 3" class="product-img" loading="lazy" onclick="playPopSound(); openGallery('❄️ Winter Belle 💙', ['https://i.imgur.com/YSJcg9e.jpeg', 'https://i.imgur.com/oEx1GJt.jpeg', 'https://i.imgur.com/HtCrMT1.jpeg'], '#0284c7')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">❄️ Winter Belle 💙</h3>
+                        <p class="product-desc">A charming handmade crochet doll with a cozy scarf and a blue dress. 💙🧶✨</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$5</p>
+                        <button class="add-to-cart" onclick="addToCart('❄️ Winter Belle 💙', 5.0, 'https://i.imgur.com/YSJcg9e.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tiny Turtle -->
+            <div class="product-card" data-name="Tiny Turtle 🐢✨ turtle" data-accent="#10b981">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/CvZ7j11.jpeg" alt="Tiny Turtle 1" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Tiny Turtle 🐢✨', ['https://i.imgur.com/CvZ7j11.jpeg', 'https://i.imgur.com/c8Heu7r.jpeg'], '#10b981')">
+                    <img src="https://i.imgur.com/c8Heu7r.jpeg" alt="Tiny Turtle 2" class="product-img" loading="lazy" onclick="playPopSound(); openGallery('Tiny Turtle 🐢✨', ['https://i.imgur.com/CvZ7j11.jpeg', 'https://i.imgur.com/c8Heu7r.jpeg'], '#10b981')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Tiny Turtle 🐢✨</h3>
+                        <p class="product-desc">A tiny handmade crochet turtle that's soft, adorable, and perfect for keys/bag. 🐢💕</p>
+                    </div>
+                    <div>
+                        <p class="product-price">1 for $5 | 2 for $8</p>
+                        <button class="add-to-cart" onclick="addToCart('Tiny Turtle (1 for $5)', 5.0, 'https://i.imgur.com/CvZ7j11.jpeg')">1 Add ($5) 🛒</button>
+                        <button class="add-to-cart" onclick="addToCart('Tiny Turtle (2 for $8)', 8.0, 'https://i.imgur.com/CvZ7j11.jpeg')">2 Add ($8) 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brew & Butter -->
+            <div class="product-card" data-name="☕ Brew & Butter 🥐 coffee croissant" data-accent="#78350f">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/xTo2nmb.jpeg" alt="☕ Brew & Butter 🥐" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('☕ Brew & Butter 🥐', ['https://i.imgur.com/xTo2nmb.jpeg'], '#78350f')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">☕ Brew & Butter 🥐</h3>
+                        <p class="product-desc">A cozy handmade crochet coffee and croissant set. ☕🥐🤎</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$4.5</p>
+                        <button class="add-to-cart" onclick="addToCart('☕ Brew & Butter 🥐', 4.5, 'https://i.imgur.com/xTo2nmb.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quacky -->
+            <div class="product-card" data-name="🦆 Quacky 💛 duck" data-accent="#eab308">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/AmN7yS4.jpeg" alt="🦆 Quacky 💛" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('🦆 Quacky 💛', ['https://i.imgur.com/AmN7yS4.jpeg'], '#eab308')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">🦆 Quacky 💛</h3>
+                        <p class="product-desc">A funny handmade crochet duck with big eyes and quirky personality. 🦆✨</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$4.5</p>
+                        <button class="add-to-cart" onclick="addToCart('🦆 Quacky 💛', 4.5, 'https://i.imgur.com/AmN7yS4.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mochi the Monkey -->
+            <div class="product-card" data-name="Mochi the Monkey 🐵✨ monkey" data-accent="#b45309">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/Sru8b4L.jpeg" alt="Mochi the Monkey" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Mochi the Monkey 🐵✨', ['https://i.imgur.com/Sru8b4L.jpeg'], '#b45309')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Mochi the Monkey 🐵✨</h3>
+                        <p class="product-desc">Soft handmade crochet monkey with adorable little details. 🧶🐒</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$7</p>
+                        <button class="add-to-cart" onclick="addToCart('Mochi the Monkey 🐵✨', 7.0, 'https://i.imgur.com/Sru8b4L.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Snowy Princess -->
+            <div class="product-card" data-name="👑 Snowy Princess 🍎✨ princess apple" data-accent="#dc2626">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/xxbwMs7.jpeg" alt="👑 Snowy Princess" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('👑 Snowy Princess 🍎✨', ['https://i.imgur.com/xxbwMs7.jpeg'], '#dc2626')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">👑 Snowy Princess 🍎✨</h3>
+                        <p class="product-desc">Handmade crochet princess with a tiny apple and a charming smile. 🍎</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$12</p>
+                        <button class="add-to-cart" onclick="addToCart('👑 Snowy Princess 🍎✨', 12.0, 'https://i.imgur.com/xxbwMs7.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jelly Bloom -->
+            <div class="product-card" data-name="🩷 Jelly Bloom ✨ jellyfish" data-accent="#f472b6">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/sKde3eC.jpeg" alt="🩷 Jelly Bloom" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('🩷 Jelly Bloom ✨', ['https://i.imgur.com/sKde3eC.jpeg'], '#f472b6')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">🩷 Jelly Bloom ✨</h3>
+                        <p class="product-desc">A beautiful handmade crochet jellyfish with soft pink tones and pearl details. 🪼🩷✨</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$7</p>
+                        <button class="add-to-cart" onclick="addToCart('🩷 Jelly Bloom ✨', 7.0, 'https://i.imgur.com/sKde3eC.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Corny -->
+            <div class="product-card" data-name="🌽 Corny 💛 corn" data-accent="#f59e0b">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/eSulf9K.jpeg" alt="🌽 Corny" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('🌽 Corny 💛', ['https://i.imgur.com/eSulf9K.jpeg'], '#f59e0b')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">🌽 Corny 💛</h3>
+                        <p class="product-desc">A cheerful handmade crochet corn keychain with a happy smile and dangling legs. 🌽💛</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$5</p>
+                        <button class="add-to-cart" onclick="addToCart('🌽 Corny 💛', 5.0, 'https://i.imgur.com/eSulf9K.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blossom Pearl -->
+            <div class="product-card" data-name="🌸 Blossom Pearl 🤍 flower pearl" data-accent="#fb7185">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/Ozewpc0.jpeg" alt="🌸 Blossom Pearl" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('🌸 Blossom Pearl 🤍', ['https://i.imgur.com/Ozewpc0.jpeg'], '#fb7185')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">🌸 Blossom Pearl 🤍</h3>
+                        <p class="product-desc">A delicate handmade crochet flower keychain paired with a pearl ring. 🌸🤍✨</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$5</p>
+                        <button class="add-to-cart" onclick="addToCart('🌸 Blossom Pearl 🤍', 5.0, 'https://i.imgur.com/Ozewpc0.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frocky -->
+            <div class="product-card" data-name="Frocky 💚 frog duck" data-accent="#16a34a">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/0ODur6n.jpeg" alt="Frocky" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Frocky 💚', ['https://i.imgur.com/0ODur6n.jpeg'], '#16a34a')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Frocky 💚</h3>
+                        <p class="product-desc">An irresistibly adorable crochet duck wearing a tiny frog hoodie. 🌿💛✨</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$5</p>
+                        <button class="add-to-cart" onclick="addToCart('Frocky 💚', 5.0, 'https://i.imgur.com/0ODur6n.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Butterfly Keychains -->
+            <div class="product-card" data-name="Butterfly Keychains butterfly flower" data-accent="#c084fc">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/2hg8KOQ.jpeg" alt="Butterfly 1" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Butterfly Keychains', ['https://i.imgur.com/2hg8KOQ.jpeg', 'https://i.imgur.com/Kiw7I3H.jpeg'], '#c084fc')">
+                    <img src="https://i.imgur.com/Kiw7I3H.jpeg" alt="Butterfly 2" class="product-img" loading="lazy" onclick="playPopSound(); openGallery('Butterfly Keychains', ['https://i.imgur.com/2hg8KOQ.jpeg', 'https://i.imgur.com/Kiw7I3H.jpeg'], '#c084fc')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Butterfly Keychains</h3>
+                        <p class="product-desc">Handmade crochet butterfly keychains with floral details, perfect for bags/keys. 🦋🌸</p>
+                    </div>
+                    <div>
+                        <p class="product-price">1 for $5 | 2 for $8</p>
+                        <button class="add-to-cart" onclick="addToCart('Butterfly Keychains (1 for $5)', 5.0, 'https://i.imgur.com/2hg8KOQ.jpeg')">1 Add ($5) 🛒</button>
+                        <button class="add-to-cart" onclick="addToCart('Butterfly Keychains (2 for $8)', 8.0, 'https://i.imgur.com/2hg8KOQ.jpeg')">2 Add ($8) 🛒</button>
+                    </div>
+                </div>
+            </div> 
+
+            <!-- Daisy Bag Charm -->
+            <div class="product-card" data-name="Daisy Bag Charm flower bag" data-accent="#0d9488">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/EeG31Pa.jpeg" alt="Daisy Bag Charm" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Daisy Bag Charm', ['https://i.imgur.com/EeG31Pa.jpeg'], '#0d9488')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Daisy Bag Charm</h3>
+                        <p class="product-desc">An elegant bag decorated with a handmade crochet daisy flower charm.</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$5</p>
+                        <button class="add-to-cart" onclick="addToCart('Daisy Bag Charm', 5.0, 'https://i.imgur.com/EeG31Pa.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Long Duck Bag Charm -->
+            <div class="product-card" data-name="Long Duck Bag Charm duck" data-accent="#ca8a04">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/E5Y0j56.jpeg" alt="Long Duck Bag Charm" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Long Duck Bag Charm', ['https://i.imgur.com/E5Y0j56.jpeg'], '#ca8a04')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Long Duck Bag Charm</h3>
+                        <p class="product-desc">A unique long crochet duck design with cute socks, perfect for bags.</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$5</p>
+                        <button class="add-to-cart" onclick="addToCart('Long Duck Bag Charm', 5.0, 'https://i.imgur.com/E5Y0j56.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- We Bare Bears -->
+            <div class="product-card" data-name="We Bare Bears Ice Bear Panda Grizzly" data-accent="#475569">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/3sshwjg.jpeg" alt="We Bare Bears" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('We Bare Bears', ['https://i.imgur.com/3sshwjg.jpeg'], '#475569')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">We Bare Bears (Ice Bear, Grizz, & Panda)</h3>
+                        <p class="product-desc">Cute, volumetric crochet keychains of the famous We Bare Bears characters.</p>
+                    </div>
+                    <div>
+                        <p class="product-price">1 for $4 | Set of 3 for $12</p>
+                        <button class="add-to-cart" onclick="addToCart('We Bare Bears (1 pc)', 4.0, 'https://i.imgur.com/3sshwjg.jpeg')">1 Add ($4) 🛒</button>
+                        <button class="add-to-cart" onclick="addToCart('We Bare Bears (Set of 3)', 12.0, 'https://i.imgur.com/3sshwjg.jpeg')">3 Add ($12) 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Red Rose Keychain -->
+            <div class="product-card" data-name="Red Rose Keychain flower" data-accent="#e11d48">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/DtCJo2Z.jpeg" alt="Red Rose Keychain" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Red Rose Keychain', ['https://i.imgur.com/DtCJo2Z.jpeg'], '#e11d48')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Red Rose Keychain</h3>
+                        <p class="product-desc">A handcrafted keychain featuring a detailed red rose with green leaves.</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$3</p>
+                        <button class="add-to-cart" onclick="addToCart('Red Rose Keychain', 3.0, 'https://i.imgur.com/DtCJo2Z.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mini Flower Bouquet -->
+            <div class="product-card" data-name="Mini Flower Bouquet bouquet flower" data-accent="#e11d48">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/n6AHVit.jpeg" alt="Mini Flower Bouquet" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Mini Flower Bouquet 💐', ['https://i.imgur.com/n6AHVit.jpeg'], '#e11d48')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Mini Flower Bouquet 💐</h3>
+                        <p class="product-desc">A gorgeous handmade crochet mini flower bouquet with delicate pearls. 💐✨</p>
+                    </div>
+                    <div>
+                        <p class="product-price">1 for $5 | 2 for $8</p>
+                        <button class="add-to-cart" onclick="addToCart('Mini Flower Bouquet (1 for $5)', 5.0, 'https://i.imgur.com/n6AHVit.jpeg')">1 Add ($5) 🛒</button>
+                        <button class="add-to-cart" onclick="addToCart('Mini Flower Bouquet (2 for $8)', 8.0, 'https://i.imgur.com/n6AHVit.jpeg')">2 Add ($8) 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jeans Crochet Accessory -->
+            <div class="product-card" data-name="Jeans Crochet Accessory pants" data-accent="#2563eb">
+                <div class="product-img-container">
+                    <div class="corner-ribbon"><span>Handmade</span></div>
+                    <img src="https://i.imgur.com/3aCoesc.jpeg" alt="Jeans Accessory" class="product-img active" loading="lazy" onclick="playPopSound(); openGallery('Jeans Crochet Accessory', ['https://i.imgur.com/3aCoesc.jpeg'], '#2563eb')">
+                </div>
+                <div class="product-info">
+                    <div>
+                        <h3 class="product-title">Jeans Crochet Accessory</h3>
+                        <p class="product-desc">A stylish handmade crochet accessory designed to decorate your jeans and outfits.</p>
+                    </div>
+                    <div>
+                        <p class="product-price">$8</p>
+                        <button class="add-to-cart" onclick="addToCart('Jeans Crochet Accessory', 8.0, 'https://i.imgur.com/3aCoesc.jpeg')">Add to Cart 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/96170202945" class="floating-whatsapp" target="_blank">💬</a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo" style="justify-content: center; margin-bottom: 0.5rem;">🧶 Loopia-LB</div>
+        <p>Handmade with love in Lebanon ✨</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/loopia_lb?igsh=MXM1dDVyZnZxbnI5ag==" target="_blank">Instagram</a>
+            <a href="#" onclick="navigator.clipboard.writeText('+96170202945'); alert('Copied: +961 70 202 945'); return false;">
+                WhatsApp: +961 70 202 945 <span style="color: #22c55e; font-weight: bold;"><br>Copy<br></span>
+            </a>
+        </div>
+        <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 1rem;">All Rights Reserved &copy; 2026 - Loopia LB 🧶</p>
+    </footer>
+
+    <!-- JavaScript code -->
+    <script>
+        // Web Audio API Sound Generator (No external files needed!)
+        let soundEnabled = true;
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playTone(frequency, type, duration) {
+            if (!soundEnabled) return;
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.type = type;
+            oscillator.frequency.value = frequency;
+            
+            gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + duration);
+        }
+
+        function playClickSound() {
+            playTone(600, 'sine', 0.08);
+        }
+
+        function playPopSound() {
+            playTone(400, 'triangle', 0.12);
+        }
+
+        function playCartSound() {
+            playTone(523.25, 'sine', 0.08);
+            setTimeout(() => playTone(659.25, 'sine', 0.12), 80);
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const soundBtn = document.getElementById('soundBtn');
+            soundBtn.textContent = soundEnabled ? '🔊' : '🔇';
+            if (soundEnabled) playClickSound();
+        }
+
+        // Layout Switcher Logic (Grid / 1-Col / 2-Cols / 4-Cols)
+        let currentLayoutIndex = 0;
+        const layouts = [
+            { class: 'layout-auto', label: '📱 Auto' },
+            { class: 'layout-2col', label: '🪟 2-Cols' },
+          
+           
+        ];
+
+        function toggleLayout() {
+            playClickSound();
+            currentLayoutIndex = (currentLayoutIndex + 1) % layouts.length;
+            const grid = document.getElementById('productsGrid');
+            const layoutBtn = document.getElementById('layoutBtn');
+
+            // Remove all layout classes
+            layouts.forEach(l => grid.classList.remove(l.class));
+            
+            // Apply current layout
+            const activeLayout = layouts[currentLayoutIndex];
+            grid.classList.add(activeLayout.class);
+            layoutBtn.textContent = activeLayout.label;
+        }
+
+        // Preloader Handler
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => { preloader.style.visibility = 'hidden'; }, 600);
+            applyTimeBasedTheme();
+        });
+
+        function applyTimeBasedTheme() {
+            const hour = new Date().getHours();
+            const body = document.body;
+            const themeBtn = document.getElementById('themeBtn');
+
+            if (hour >= 5 && hour < 17) {
+                body.setAttribute('data-theme', 'light');
+                themeBtn.textContent = '☀️';
+            } else if (hour >= 17 && hour < 20) {
+                body.setAttribute('data-theme', 'evening');
+                themeBtn.textContent = '🌇';
+            } else {
+                body.setAttribute('data-theme', 'night');
+                themeBtn.textContent = '🌙';
+            }
+        }
+
+        let cart = [];
+
+        function addToCart(name, price, image) {
+            playCartSound();
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, image, quantity: 1 });
+            }
+            updateCartUI();
+        }
+
+        function changeQuantity(index, delta) {
+            playClickSound();
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsList = document.getElementById('cartItemsList');
+            const cartCount = document.getElementById('cart-count');
+            const cartSummary = document.getElementById('cartSummary');
+            const finalTotalPrice = document.getElementById('finalTotalPrice');
+
+            cartItemsList.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsList.innerHTML = '<p style="color: #64748b; text-align: center; padding: 1.5rem 0; font-size: 1rem;">Your cart is empty.</p>';
+                cartSummary.style.display = 'none';
+                cartCount.textContent = '0';
+                return;
+            }
+
+            cartSummary.style.display = 'block';
+            let totalItems = 0;
+            let totalPrice = 0;
+
+            cart.forEach((item, index) => {
+                totalItems += item.quantity;
+                totalPrice += item.price * item.quantity;
+
+                const li = document.createElement('li');
+                li.className = 'cart-item';
+                li.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div style="flex-grow: 1;">
+                        <h4 style="font-size: 0.95rem; font-weight: 800; margin-bottom: 0.2rem;">${item.name}</h4>
+                        <p style="color: var(--primary-color); font-weight: 700; font-size: 0.9rem;">$${item.price.toFixed(2)}</p>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px;">
+                            <button onclick="changeQuantity(${index}, -1)" style="width: 24px; height: 24px; border-radius: 6px; border: 1px solid #cbd5e1; background: var(--card-bg); color: var(--text-color); cursor: pointer; font-weight: bold;">-</button>
+                            <span style="font-weight: 800; font-size: 0.9rem;">${item.quantity}</span>
+                            <button onclick="changeQuantity(${index}, 1)" style="width: 24px; height: 24px; border-radius: 6px; border: 1px solid #cbd5e1; background: var(--card-bg); color: var(--text-color); cursor: pointer; font-weight: bold;">+</button>
+                        </div>
+                    </div>
+                    <button onclick="changeQuantity(${index}, -${item.quantity})" style="background: none; border: none; color: #ef4444; font-size: 1.2rem; cursor: pointer; padding: 5px;" title="Remove">×</button>
+                `;
+                cartItemsList.appendChild(li);
+            });
+
+            cartCount.textContent = totalItems;
+            finalTotalPrice.textContent = `$${totalPrice.toFixed(2)}`;
+        }
+
+        function toggleCart() {
+            playClickSound();
+            const cartModal = document.getElementById('cartModal');
+            cartModal.classList.toggle('active');
+        }
+
+        function toggleTheme() {
+            playClickSound();
+            const body = document.body;
+            const themeBtn = document.getElementById('themeBtn');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                body.setAttribute('data-theme', 'evening');
+                themeBtn.textContent = '🌇';
+            } else if (currentTheme === 'evening') {
+                body.setAttribute('data-theme', 'night');
+                themeBtn.textContent = '🌙';
+            } else if (currentTheme === 'night') {
+                body.setAttribute('data-theme', 'dark');
+                themeBtn.textContent = '✨';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeBtn.textContent = '☀️';
+            }
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                if (name.includes(query)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openGallery(title, images, accentColor) {
+            const modal = document.getElementById('galleryModal');
+            const mainImg = document.getElementById('galleryMainImg');
+            const thumbsContainer = document.getElementById('galleryThumbs');
+            const titleEl = document.getElementById('galleryTitle');
+
+            titleEl.textContent = title;
+            titleEl.style.color = accentColor || 'var(--secondary-color)';
+            mainImg.src = images[0];
+            thumbsContainer.innerHTML = '';
+
+            images.forEach((imgSrc, idx) => {
+                const thumb = document.createElement('img');
+                thumb.src = imgSrc;
+                thumb.className = `gallery-thumb ${idx === 0 ? 'active' : ''}`;
+                thumb.onclick = () => {
+                    playClickSound();
+                    mainImg.src = imgSrc;
+                    document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                };
+                thumbsContainer.appendChild(thumb);
+            });
+
+            modal.classList.add('active');
+        }
+
+        function closeGallery() {
+            playClickSound();
+            document.getElementById('galleryModal').classList.remove('active');
+        }
+
+        function submitOrder() {
+            playClickSound();
+            const phone = document.getElementById('phoneInput').value;
+            if (!phone) {
+                alert('Please enter your WhatsApp number!');
+                return;
+            }
+            let message = "Hello Loopia-LB, I would like to place an order:%0A";
+            cart.forEach(item => {
+                message += `- ${item.name} (x${item.quantity}) : $${(item.price * item.quantity).toFixed(2)}%0A`;
+            });
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `%0ATotal: $${total.toFixed(2)}`;
+            const payment = document.getElementById('paymentMethodSelect').value;
+            const notes = document.getElementById('customNoteInput').value;
+            message += `%0APayment: ${payment}%0ANotes: ${notes}`;
+
+            window.open(`https://wa.me/96170202945?text=${message}`, '_blank');
+        }
+    </script>
+</body>
+</html>        /* Night Theme (ليلًا) */
+        [data-theme="night"] {
+            --primary-color: #a855f7;
+            --secondary-color: #9333ea;
+            --bg-color: #030712;
+            --text-color: #f3f4f6;
+            --card-bg: rgba(17, 24, 39, 0.95);
+            --glass-border: rgba(168, 85, 247, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            position: relative;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        .bg-decoration {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            transition: background 0.5s ease;
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(236, 72, 153, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(245, 158, 11, 0.07) 0%, transparent 45%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(253, 242, 248, 0.8) 100%);
+        }
+
+        [data-theme="dark"] .bg-decoration {
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(244, 114, 182, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(245, 158, 11, 0.04) 0%, transparent 45%),
+                linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.9) 100%);
+        }
+
+        [data-theme="evening"] .bg-decoration {
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(249, 115, 22, 0.1) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(234, 88, 12, 0.08) 0%, transparent 45%),
+                linear-gradient(135deg, rgba(255, 247, 237, 0.9) 0%, rgba(254, 215, 170, 0.5) 100%);
+        }
+
+        [data-theme="night"] .bg-decoration {
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(168, 85, 247, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(59, 130, 246, 0.06) 0%, transparent 45%),
+                linear-gradient(135deg, rgba(3, 7, 18, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%);
+        }
+
+        /* Cinematic Intro Preloader with Spinning Yarn */
+        #preloader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffffff;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 9999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        [data-theme="dark"] #preloader { background: #0f172a; }
+        [data-theme="evening"] #preloader { background: #fff7ed; }
+        [data-theme="night"] #preloader { background: #030712; }
+
+        .cinematic-yarn {
+            font-size: 4rem;
+            animation: spinYarn 1.2s linear infinite;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        @keyframes spinYarn {
+            0% { transform: rotate(0deg) scale(0.9); }
+            50% { transform: rotate(180deg) scale(1.1); }
+            100% { transform: rotate(360deg) scale(0.9); }
+        }
+
+        .preloader-text { font-size: 1.4rem; font-weight: 900; color: var(--primary-color); letter-spacing: 1px; }
+
+        header {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            border-bottom: 1px solid var(--glass-border);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar {
+            max-width: 1400px; margin: 0 auto;
+            padding: 0.8rem clamp(1rem, 3vw, 2.5rem);
+            display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 900;
+            color: var(--primary-color); display: flex; align-items: center; gap: 0.4rem;
+            text-decoration: none;
+        }
+
+        .nav-controls { display: flex; align-items: center; gap: 0.8rem; }
+
         .theme-toggle, .cart-btn, .sound-toggle {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white; border: none;
