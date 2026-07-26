@@ -763,7 +763,7 @@
         </div>
     </div>
 
-    <a href="https://wa.me/96170202945" class="floating-whatsapp" target="_blank">💬</a>
+    <a href="https://wa.me/96170896774" class="floating-whatsapp" target="_blank">💬</a>
 
     <footer>
         <div class="logo" style="justify-content: center; margin-bottom: 0.4rem;">🧶 Loopia-LB</div>
@@ -771,6 +771,7 @@
         <div class="social-links">
             <a href="https://www.instagram.com/loopia_lb?igsh=MXM1dDVyZnZxbnI5ag==" target="_blank">Instagram</a>
             <a href="#" onclick="navigator.clipboard.writeText('+96170202945'); alert('Copied: +961 70 202 945'); return false;">WhatsApp: +961 70 202 945</a>
+            <a href="#" onclick="navigator.clipboard.writeText('+96170896774'); alert('Copied: +961 70 896 774'); return false;">Website Created by<br> +961 70 896 774</a>
         </div>
         <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.8rem;">All Rights Reserved &copy; 2026 - Loopia LB 🧶</p>
     </footer>
@@ -793,7 +794,6 @@
         function playClickSound() { playTone(600, 'sine', 0.07); }
         function playPopSound() { playTone(400, 'triangle', 0.1); }
         function playCartSound() { playTone(523.25, 'sine', 0.07); setTimeout(() => playTone(659.25, 'sine', 0.1), 70); }
-
         function toggleSound() {
             soundEnabled = !soundEnabled;
             document.getElementById('soundBtn').textContent = soundEnabled ? '🔊' : '🔇';
@@ -816,17 +816,17 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        let uploadedImagesData = [];
+        let uploadedImagesNames = [];
         function handleImageUpload(e) {
             playClickSound();
             const files = e.target.files, previewGrid = document.getElementById('previewImagesGrid'), uploadText = document.getElementById('uploadText');
-            previewGrid.innerHTML = ''; uploadedImagesData = [];
+            previewGrid.innerHTML = ''; uploadedImagesNames = [];
             if (files.length > 0) {
-                uploadText.textContent = `${files.length} image(s) selected`;
+                uploadText.textContent = `${files.length} image(s) selected (Please send the picture directly in chat)`;
                 for (let i = 0; i < files.length; i++) {
+                    uploadedImagesNames.push(files[i].name);
                     const reader = new FileReader();
                     reader.onload = ev => {
-                        uploadedImagesData.push({ name: files[i].name, dataUrl: ev.target.result });
                         const img = document.createElement('img'); img.src = ev.target.result; img.className = 'preview-thumb';
                         previewGrid.appendChild(img);
                     };
@@ -843,14 +843,12 @@
             let msg = `✨ Hello Loopia-LB, I would like to place a custom order:%0A- Item: ${itemName}%0A`;
             if (colors) msg += `- Colors: ${colors}%0A`;
             if (details) msg += `- Details: ${details}%0A`;
-            if (uploadedImagesData.length > 0) {
-                msg += `- Attached Images (${uploadedImagesData.length}):%0A`;
-                uploadedImagesData.forEach((img, idx) => {
-                    msg += `  ${idx + 1}. [${img.name}] -> Link/Data: ${encodeURIComponent(img.dataUrl)}%0A`;
-                });
+            if (uploadedImagesNames.length > 0) {
+                msg += `- Attached Images (${uploadedImagesNames.length}): ${uploadedImagesNames.join(', ')}%0A`;
+                msg += `*(Note: Please send the design picture directly in this chat!)*%0A`;
             }
             msg += `- Phone: ${phone}`;
-            window.open(`https://wa.me/96170202945?text=${msg}`, '_blank');
+            window.open(`https://wa.me/96170896774?text=${msg}`, '_blank');
         }
 
         window.addEventListener('load', () => {
@@ -976,7 +974,7 @@
             message += `%0ATotal: $${total.toFixed(2)}`;
             message += `%0APayment: ${document.getElementById('paymentMethodSelect').value}`;
             message += `%0APhone: ${phone}`;
-            window.open(`https://wa.me/96170202945?text=${message}`, '_blank');
+            window.open(`https://wa.me/96170896774?text=${message}`, '_blank');
         }
     </script>
 </body>
