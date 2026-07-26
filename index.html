@@ -24,7 +24,6 @@
         [data-theme="evening"] .bg-decoration { background-image: radial-gradient(circle at 15% 25%, rgba(249,115,22,0.1) 0%, transparent 45%), radial-gradient(circle at 85% 75%, rgba(234,88,12,0.08) 0%, transparent 45%), linear-gradient(135deg, rgba(255,247,237,0.9) 0%, rgba(254,215,170,0.5) 100%); }
         [data-theme="night"] .bg-decoration { background-image: radial-gradient(circle at 15% 25%, rgba(168,85,247,0.08) 0%, transparent 45%), radial-gradient(circle at 85% 75%, rgba(59,130,246,0.06) 0%, transparent 45%), linear-gradient(135deg, rgba(3,7,18,0.9) 0%, rgba(17,24,39,0.95) 100%); }
 
-        /* تحسين شاشة التحميل لتكون سريعة وذات تأثيرات رائعة */
         #preloader {
             position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column;
             justify-content: center; align-items: center; z-index: 9999; 
@@ -213,13 +212,11 @@
 
     <div class="bg-decoration"></div>
 
-    <!-- Preloader المحدث والسريع مع تأثيرات ممتازة -->
     <div id="preloader">
         <div class="cinematic-yarn">🧶</div>
         <div class="preloader-text">Loopia-LB ✨</div>
     </div>
 
-    <!-- Header -->
     <header>
         <div class="navbar">
             <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
@@ -242,7 +239,6 @@
         </div>
     </header>
 
-    <!-- Gallery Modal -->
     <div class="gallery-modal" id="galleryModal">
         <div class="gallery-content">
             <button class="close-gallery" onclick="closeGallery()">&times;</button>
@@ -252,7 +248,6 @@
         </div>
     </div>
 
-    <!-- Cart Modal -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-content">
             <button class="close-cart" onclick="toggleCart()">&times;</button>
@@ -280,7 +275,6 @@
         </div>
     </div>
 
-    <!-- PAGE 1: HOME -->
     <div id="homePage" class="page-section active-page">
         <section class="hero">
             <div class="hero-content-wrapper">
@@ -293,7 +287,6 @@
             <h2 class="section-title">Our Collection</h2>
             <div class="products-grid layout-auto" id="productsGrid">
                 
-                <!-- Sunflower Duck -->
                 <div class="product-card" data-name="sunflower duck flower duckling keychain" data-accent="#eab308">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -312,7 +305,6 @@
                     </div>
                 </div>
 
-                <!-- Hello Kitty Doll -->
                 <div class="product-card" data-name="hello kitty pink dress keychain doll" data-accent="#ec4899">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -330,7 +322,6 @@
                     </div>
                 </div>
 
-                <!-- Snoopy & Friends Bag Charm -->
                 <div class="product-card" data-name="snoopy puppy dog bag charm keychain" data-accent="#3b82f6">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -349,7 +340,6 @@
                     </div>
                 </div>
 
-                <!-- Sweet Cow -->
                 <div class="product-card" data-name="sweet cow keychain cow" data-accent="#8b5cf6">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -367,7 +357,6 @@
                     </div>
                 </div>
 
-                <!-- Wise Owl -->
                 <div class="product-card" data-name="wise owl with glasses owl" data-accent="#d97706">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -385,7 +374,6 @@
                     </div>
                 </div>
 
-                <!-- Lilo & Stitch -->
                 <div class="product-card" data-name="Lilo & Stitch 🌺✨ lilo stitch alien" data-accent="#3b82f6">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -404,7 +392,6 @@
                     </div>
                 </div>
 
-                <!-- Mochi -->
                 <div class="product-card" data-name="🐾 Mochi 🤍 puppy dog" data-accent="#64748b">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -422,7 +409,6 @@
                     </div>
                 </div>
 
-                <!-- Floral Crochet Headband -->
                 <div class="product-card" data-name="Floral Crochet Headband 🌸✨ headband hair accessory" data-accent="#f472b6">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -441,7 +427,6 @@
                     </div>
                 </div>
 
-                <!-- Winter Belle -->
                 <div class="product-card" data-name="❄️ Winter Belle 💙 princess doll" data-accent="#0284c7">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -461,7 +446,6 @@
                     </div>
                 </div>
 
-                <!-- Tiny Turtle -->
                 <div class="product-card" data-name="Tiny Turtle 🐢✨ turtle" data-accent="#10b981">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -481,7 +465,6 @@
                     </div>
                 </div>
 
-                <!-- Brew & Butter -->
                 <div class="product-card" data-name="☕ Brew & Butter 🥐 coffee croissant" data-accent="#78350f">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -499,7 +482,6 @@
                     </div>
                 </div>
 
-                <!-- Quacky -->
                 <div class="product-card" data-name="🦆 Quacky 💛 duck" data-accent="#eab308">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -517,7 +499,6 @@
                     </div>
                 </div>
 
-                <!-- Mochi the Monkey -->
                 <div class="product-card" data-name="Mochi the Monkey 🐵✨ monkey" data-accent="#b45309">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -535,7 +516,6 @@
                     </div>
                 </div>
 
-                <!-- Snowy Princess -->
                 <div class="product-card" data-name="👑 Snowy Princess 🍎✨ princess apple" data-accent="#dc2626">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -553,7 +533,6 @@
                     </div>
                 </div>
 
-                <!-- Jelly Bloom -->
                 <div class="product-card" data-name="🩷 Jelly Bloom ✨ jellyfish" data-accent="#f472b6">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -571,7 +550,6 @@
                     </div>
                 </div>
 
-                <!-- Corny -->
                 <div class="product-card" data-name="🌽 Corny 💛 corn" data-accent="#f59e0b">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -589,7 +567,6 @@
                     </div>
                 </div>
 
-                <!-- Blossom Pearl -->
                 <div class="product-card" data-name="🌸 Blossom Pearl 🤍 flower pearl" data-accent="#fb7185">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -607,7 +584,6 @@
                     </div>
                 </div>
 
-                <!-- Frocky -->
                 <div class="product-card" data-name="Frocky 💚 frog duck" data-accent="#16a34a">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -625,7 +601,6 @@
                     </div>
                 </div>
 
-                <!-- Butterfly Keychains -->
                 <div class="product-card" data-name="Butterfly Keychains butterfly flower" data-accent="#c084fc">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -645,7 +620,6 @@
                     </div>
                 </div>
 
-                <!-- Daisy Bag Charm -->
                 <div class="product-card" data-name="Daisy Bag Charm flower bag" data-accent="#0d9488">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -663,7 +637,6 @@
                     </div>
                 </div>
 
-                <!-- Long Duck Bag Charm -->
                 <div class="product-card" data-name="Long Duck Bag Charm duck" data-accent="#ca8a04">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -681,7 +654,6 @@
                     </div>
                 </div>
 
-                <!-- We Bare Bears -->
                 <div class="product-card" data-name="We Bare Bears Ice Bear Panda Grizzly" data-accent="#475569">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -699,7 +671,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Red Rose Keychain -->
+
                 <div class="product-card" data-name="Red Rose Keychain flower" data-accent="#e11d48">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -717,7 +689,6 @@
                     </div>
                 </div>
 
-                <!-- Mini Flower Bouquet -->
                 <div class="product-card" data-name="Mini Flower Bouquet bouquet flower" data-accent="#e11d48">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -736,7 +707,6 @@
                     </div>
                 </div>
 
-                <!-- Jeans Crochet Accessory -->
                 <div class="product-card" data-name="Jeans Crochet Accessory pants" data-accent="#2563eb">
                     <div class="product-img-container">
                         <div class="corner-ribbon"><span>Handmade</span></div>
@@ -758,7 +728,6 @@
         </main>
     </div>
 
-    <!-- PAGE 2: CUSTOM REQUESTS -->
     <div id="customPage" class="page-section">
         <div class="custom-order-container">
             <h2>🎨 Custom Order Request</h2>
@@ -794,10 +763,8 @@
         </div>
     </div>
 
-    <!-- Floating WhatsApp -->
     <a href="https://wa.me/96170202945" class="floating-whatsapp" target="_blank">💬</a>
 
-    <!-- Footer -->
     <footer>
         <div class="logo" style="justify-content: center; margin-bottom: 0.4rem;">🧶 Loopia-LB</div>
         <p style="font-size: 0.9rem;">Handmade with love in Lebanon ✨</p>
@@ -808,7 +775,6 @@
         <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.8rem;">All Rights Reserved &copy; 2026 - Loopia LB 🧶</p>
     </footer>
 
-    <!-- JavaScript -->
     <script>
         let soundEnabled = true;
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -850,17 +816,17 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        let uploadedImagesNames = [];
+        let uploadedImagesData = [];
         function handleImageUpload(e) {
             playClickSound();
             const files = e.target.files, previewGrid = document.getElementById('previewImagesGrid'), uploadText = document.getElementById('uploadText');
-            previewGrid.innerHTML = ''; uploadedImagesNames = [];
+            previewGrid.innerHTML = ''; uploadedImagesData = [];
             if (files.length > 0) {
                 uploadText.textContent = `${files.length} image(s) selected`;
                 for (let i = 0; i < files.length; i++) {
-                    uploadedImagesNames.push(files[i].name);
                     const reader = new FileReader();
                     reader.onload = ev => {
+                        uploadedImagesData.push({ name: files[i].name, dataUrl: ev.target.result });
                         const img = document.createElement('img'); img.src = ev.target.result; img.className = 'preview-thumb';
                         previewGrid.appendChild(img);
                     };
@@ -877,12 +843,16 @@
             let msg = `✨ Hello Loopia-LB, I would like to place a custom order:%0A- Item: ${itemName}%0A`;
             if (colors) msg += `- Colors: ${colors}%0A`;
             if (details) msg += `- Details: ${details}%0A`;
-            if (uploadedImagesNames.length > 0) msg += `- Images: ${uploadedImagesNames.length} attached%0A`;
+            if (uploadedImagesData.length > 0) {
+                msg += `- Attached Images (${uploadedImagesData.length}):%0A`;
+                uploadedImagesData.forEach((img, idx) => {
+                    msg += `  ${idx + 1}. [${img.name}] -> Link/Data: ${encodeURIComponent(img.dataUrl)}%0A`;
+                });
+            }
             msg += `- Phone: ${phone}`;
             window.open(`https://wa.me/96170202945?text=${msg}`, '_blank');
         }
 
-        // جعل شاشة التحميل سريعة وسلسة جداً (تختفي فوراً بمجرد تحميل الصفحة)
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             preloader.style.opacity = '0';
